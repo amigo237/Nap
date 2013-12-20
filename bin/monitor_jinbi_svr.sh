@@ -14,7 +14,7 @@ if [[ $num -lt 2 ]];then
     cp jinbi.log ./log/jinbi.log.$dbnow
     /data/vhosts/jinbi.xunlei.com/bin/restart_jinbi_svr.sh
     
-    #·¢ËÍ±¨¾¯ÓÊ¼þ
+    #send warn email
 fi
 end_time=`date`
 #echo ${end_time}
