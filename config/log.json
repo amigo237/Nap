@@ -1,0 +1,5 @@
+﻿{
+  "dir": "../log",
+  "level": "DEBUG",
+  "type": "file"
+}

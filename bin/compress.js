@@ -5,9 +5,9 @@
  * 利用uglify压缩文件，支持从命令行传入压缩参数，也可以在文件中配置压缩参数
  *
  * 命令行使用: 
- * 1. ./compress 源文件 目标文件
- * 2. ./compress 源文件 目标路径, 这种方式会沿用未压缩文件的文件名
- * 3. ./compress 源目录 目标目录 -d, -d参数表示递归目录压缩，没有该选项表示只压缩一层目录
+ * 1. ./compress.js -s 源文件 -d 目标文件
+ * 2. ./compress.js -s 源文件 -d 目标路径, 这种方式会沿用未压缩文件的文件名
+ * 3. ./compress.js -s 源目录 -d 目标目录 --deep, --deep参数表示递归目录压缩，没有该选项表示只压缩一层目录
  * 
  * 配置项使用：
  * 配置config数组即可，srcPath表示需要压缩的路径，desPath表示压缩后的文件路径，deep表示递归压缩
@@ -20,15 +20,15 @@
 var fs = require("fs");
 var path = require("path");
 var uglify = require("uglify-js");
+var argv = require('optimist')
+    .alias('s', 'src')
+    .alias('d', 'des')
+    .argv;
+
 var config = [
-    {
-        //srcPath: "/home/luzhao/js/pages/test2.js",
-        //desPath: "../htdocs/doc/test1.js",        
-        //srcPath: "/home/luzhao/js/pages/",
-        //desPath: "/home/luzhao/jas1/",
-        
-        srcPath: "/data/vhosts/jinbi.xunlei.com/htdocs/static/js/pages",
-        desPath: "/data/vhosts/jinbi.xunlei.com/htdocs/static/js",
+    {        
+        srcPath: "a.js",
+        desPath: "a-min.js",
         deep: false
     }
 ];
@@ -87,13 +87,13 @@ function resolve(id) {
     return realpath;
 };
 
-var srcPath = process.argv[2],
-    desPath = process.argv[3],
-    deep = process.argv[4] == "-d" ? true : false;
+var srcPath = argv.src,
+    desPath = argv.des,
+    deep = argv.deep;
 
-if (srcPath) {
-    if (!desPath) {
-        console.log("传入目标路径有误");
+if (process.argv.length > 2) {
+    if (!srcPath && !desPath) {
+        console.log("传入路径有误");
         process.exit(1);
     }
     else {
