@@ -1,21 +1,20 @@
 #!/bin/sh
 
+root_path=/data/vhosts/jinbi.client.xunlei.com/htdocs/
+entrance_file=server.js
+restart_file=/data/vhosts/jinbi.client.xunlei.com/bin/restart_jinbi_svr.sh
 today=`date +%Y-%m-%d`
 dbnow=`date '+%Y%m%d%H%M%S'`
 
-start_time=`date`
-#echo ${start_time}
+cd $root_path
 
-cd /data/vhosts/jinbi.xunlei.com/htdocs/
-
-num=`ps -ef | grep node | grep -v "grep" | grep /data/vhosts/jinbi.xunlei.com/htdocs/server.js | wc -l`
+num=`ps -ef | grep node | grep -v "grep" | grep ${root_path}${entrance_file} | wc -l`
 if [[ $num -lt 2 ]];then
     echo "${dbnow}----------server.js num:${num}"
-    cp jinbi.log ./log/jinbi.log.$dbnow
-    /data/vhosts/jinbi.xunlei.com/bin/restart_jinbi_svr.sh
+    cp uncaughtException.log ./log/uncaughtException.log.$dbnow
+    $restart_file
     
-    #send warn email
+    /usr/local/bin/sendEmail -s mail.cc.sandai.net -xu 'monitor@cc.sandai.net' -xp 121212 -f monitor@cc.sandai.net -t fengyajie@cc.sandai.net -cc luzhao@cc.sandai.net -u "jinbi svr down" -m "jinbi svr down @ ${dbnow}"
 fi
-end_time=`date`
-#echo ${end_time}
+
 exit
