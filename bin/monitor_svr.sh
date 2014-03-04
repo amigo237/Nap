@@ -2,7 +2,7 @@
 
 root_path=/data/vhosts/jinbi.client.xunlei.com/htdocs/
 entrance_file=server.js
-restart_file=/data/vhosts/jinbi.client.xunlei.com/bin/restart_jinbi_svr.sh
+restart_file=/data/vhosts/jinbi.client.xunlei.com/bin/restart_svr.sh
 today=`date +%Y-%m-%d`
 dbnow=`date '+%Y%m%d%H%M%S'`
 
