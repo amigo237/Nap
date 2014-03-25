@@ -1,0 +1,24 @@
+{
+  "name": "--",
+  "version": "0.0.1",
+  "author": "luzhao <luzhao@xunlei.com>",
+  "private": true,
+  "keywords": [
+    "thunder"
+  ],
+  "main": "./server.js",
+  "dependencies": {
+    "express": "3.x.x",
+    "ejs": "0.8.5",
+    "underscore": "1.5.2",
+    "formidable": "1.0.14",
+    "mysql": "2.x.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-concat": "~0.3.0"
+  }
+}
